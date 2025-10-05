@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Shield } from "lucide-react";
 import { APP_NAME } from "~/lib/constants";
 import sdk from "@farcaster/frame-sdk";
 import { useMiniApp } from "@neynar/react";

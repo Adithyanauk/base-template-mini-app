@@ -1,53 +1,61 @@
-import React from "react";
-import type { Tab } from "~/components/Demo";
+"use client";
+
+import { Shield, Activity, Search, Zap } from "lucide-react";
+
+export type Tab = "dashboard" | "simulator" | "inspector" | "live-feed";
 
 interface FooterProps {
   activeTab: Tab;
   setActiveTab: (tab: Tab) => void;
-  showWallet?: boolean;
 }
 
-export const Footer: React.FC<FooterProps> = ({ activeTab, setActiveTab, showWallet = false }) => (
-  <div className="fixed bottom-0 left-0 right-0 mx-4 mb-4 bg-gray-100 dark:bg-gray-800 border-[3px] border-double border-purple-500 px-2 py-2 rounded-lg z-50">
-    <div className="flex justify-around items-center h-14">
-      <button
-        onClick={() => setActiveTab('home')}
-        className={`flex flex-col items-center justify-center w-full h-full ${
-          activeTab === 'home' ? 'text-purple-500' : 'text-gray-500'
-        }`}
-      >
-        <span className="text-xl">🏠</span>
-        <span className="text-xs mt-1">Home</span>
-      </button>
-      <button
-        onClick={() => setActiveTab('actions')}
-        className={`flex flex-col items-center justify-center w-full h-full ${
-          activeTab === 'actions' ? 'text-purple-500' : 'text-gray-500'
-        }`}
-      >
-        <span className="text-xl">⚡</span>
-        <span className="text-xs mt-1">Actions</span>
-      </button>
-      <button
-        onClick={() => setActiveTab('context')}
-        className={`flex flex-col items-center justify-center w-full h-full ${
-          activeTab === 'context' ? 'text-purple-500' : 'text-gray-500'
-        }`}
-      >
-        <span className="text-xl">📋</span>
-        <span className="text-xs mt-1">Context</span>
-      </button>
-      {showWallet && (
+export function Footer({ activeTab, setActiveTab }: FooterProps) {
+  return (
+    <div className="fixed bottom-0 left-0 right-0 bg-background border-t border-border shadow-lg backdrop-blur-sm">
+      <div className="flex justify-around items-center py-3">
         <button
-          onClick={() => setActiveTab('wallet')}
-          className={`flex flex-col items-center justify-center w-full h-full ${
-            activeTab === 'wallet' ? 'text-purple-500' : 'text-gray-500'
+          onClick={() => setActiveTab("dashboard")}
+          className={`flex flex-col items-center py-2 px-3 text-xs transition-colors ${
+            activeTab === "dashboard" ? "text-blue-600 dark:text-blue-400" : "text-muted-foreground hover:text-foreground"
           }`}
         >
-          <span className="text-xl">👛</span>
-          <span className="text-xs mt-1">Wallet</span>
+          <Shield className="w-5 h-5 mb-1" />
+          Dashboard
         </button>
-      )}
+        <button
+          onClick={() => setActiveTab("simulator")}
+          className={`flex flex-col items-center py-2 px-3 text-xs transition-colors ${
+            activeTab === "simulator"
+              ? "text-blue-600 dark:text-blue-400"
+              : "text-muted-foreground hover:text-foreground"
+          }`}
+        >
+          <Zap className="w-5 h-5 mb-1" />
+          Simulator
+        </button>
+        <button
+          onClick={() => setActiveTab("inspector")}
+          className={`flex flex-col items-center py-2 px-3 text-xs transition-colors ${
+            activeTab === "inspector"
+              ? "text-blue-600 dark:text-blue-400"
+              : "text-muted-foreground hover:text-foreground"
+          }`}
+        >
+          <Search className="w-5 h-5 mb-1" />
+          Inspector
+        </button>
+        <button
+          onClick={() => setActiveTab("live-feed")}
+          className={`flex flex-col items-center py-2 px-3 text-xs transition-colors ${
+            activeTab === "live-feed"
+              ? "text-blue-600 dark:text-blue-400"
+              : "text-muted-foreground hover:text-foreground"
+          }`}
+        >
+          <Activity className="w-5 h-5 mb-1" />
+          Live Feed
+        </button>
+      </div>
     </div>
-  </div>
-);
+  );
+}
